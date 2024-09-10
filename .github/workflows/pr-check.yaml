@@ -20,18 +20,17 @@ jobs:
     needs: check-dependencies
     steps:
       - uses: actions/checkout@v4
+      - name: Install LocalStack CLIs
+        uses: LocalStack/setup-localstack@v0.2.3
+        with:
+          skip-startup: 'true'
+          install-awslocal: 'true'
       - name: Build Docker Compose
         run: docker compose -f docker-compose.example.yaml up --build -d
       - name: Wait 30 seconds
         run: sleep 30
       - name: Output stacks to json
-        run: aws --endpoint-url=http://localhost:4566 cloudformation list-stacks --output json > stacks.json
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-          AWS_REGION: us-east-1
-          AWS_PROFILE: test
-          AWS_ACCESS_KEY_ID: test
-          AWS_SECRET_ACCESS_KEY: test
+        run: awslocal cloudformation list-stacks --output json > stacks.json
       - name: Assert CDKToolkit exists in stacks.json file
         run: grep -q "CDKToolkit" stacks.json
       
