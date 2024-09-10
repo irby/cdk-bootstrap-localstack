@@ -26,6 +26,8 @@ jobs:
         run: sleep 30
       - name: Output stacks to json
         run: aws --endpoint-url=http://localhost:4566 cloudformation list-stacks --output json > stacks.json
+        env:
+          AWS_DEFAULT_REGION: us-east-1
       - name: Assert CDKToolkit exists in stacks.json file
         run: grep -q "CDKToolkit" stacks.json
       
