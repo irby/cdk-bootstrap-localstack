@@ -29,4 +29,4 @@ services:
       AWS_ENDPOINT_URL: http://localstack:4566
     build:
       context: .
-      dockerfile: cdk-bootstrap.Dockerfile
+      dockerfile: Dockerfile
