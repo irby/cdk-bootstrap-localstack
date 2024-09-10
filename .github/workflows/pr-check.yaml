@@ -21,4 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker Compose
-        run: docker compose -f docker-compose.example.yaml up --build
+        run: docker compose -f docker-compose.example.yaml up --build -d
+      - name: Wait 30 seconds
+        run: sleep 30
+      - name: Output stacks to json
+        run: aws --endpoint-url=http://localhost:4566 cloudformation list-stacks --output json > stacks.json
+      - name: Assert CDKToolkit exists in stacks.json file
+        run: grep -q "CDKToolkit" stacks.json
+      
