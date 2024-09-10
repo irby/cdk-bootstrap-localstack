@@ -27,10 +27,10 @@ jobs:
           install-awslocal: 'true'
       - name: Build Docker Compose
         run: docker compose -f docker-compose.example.yaml up --build -d
-      - name: Wait 30 seconds
-        run: sleep 30
+      - name: Wait 15 seconds
+        run: sleep 15
       - name: Output stacks to json
         run: awslocal cloudformation list-stacks --output json > stacks.json
       - name: Assert CDKToolkit exists in stacks.json file
-        run: grep -q "CDKToolkit" stacks.json
+        run: grep -q "Somethingincorrect" stacks.json
       
