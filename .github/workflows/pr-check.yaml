@@ -32,5 +32,5 @@ jobs:
       - name: Output stacks to json
         run: awslocal cloudformation list-stacks --output json > stacks.json
       - name: Assert CDKToolkit exists in stacks.json file
-        run: grep -q "Somethingincorrect" stacks.json
+        run: grep -q "CDKToolkit" stacks.json
       
