@@ -1,0 +1,12 @@
+{
+  "name": "cdk-bootstrap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cdk.json",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-cdk-lib": "2.155.0",
+    "ts-node": "10.9.2"
+  }
+}
